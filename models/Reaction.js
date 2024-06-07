@@ -20,6 +20,7 @@ const reactionSchema = new Schema(
       type: Date,
       default: Date.now(),
 // TODO * Use a getter method to format the timestamp on query
+    //  get: timestamp => dateFormat(timestamp)
     },
   },
   {
@@ -27,6 +28,7 @@ const reactionSchema = new Schema(
       getters: true,
     },
     id: false,
+    timestamps: true
   }
 );
 
