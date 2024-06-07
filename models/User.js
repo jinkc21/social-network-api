@@ -1,6 +1,5 @@
 const { Schema, model } = require('mongoose');
 const thoughtSchema = require('./Thought');
-const userSchema = require('./User');
 
 // Schema to create User model
 const userSchema = new Schema(
@@ -21,14 +20,20 @@ const userSchema = new Schema(
       }
     },
    thoughts: [thoughtSchema],
-   friends: [userSchema],
+   friends: [{ type: Schema.Types.ObjectId, ref: 'user' }],
   },
   {
     toJSON: {
+      virtuals: true,
       getters: true,
     },
+    id: false,
   }
 );
+
+postSchema.virtual('friendCount').get(function () {
+  return this.friends.length;
+});
 
 const User = model('user', userSchema);
 
