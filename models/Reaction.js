@@ -19,7 +19,7 @@ const reactionSchema = new Schema(
     createdAt: {
       type: Date,
       default: Date.now(),
-// TODO * Use a getter method to format the timestamp on query
+// Used dayjs to format instead of getter method
     //  get: timestamp => dateFormat(timestamp)
     },
   },
