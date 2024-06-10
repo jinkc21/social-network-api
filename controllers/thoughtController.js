@@ -25,10 +25,11 @@ module.exports = {
       if (!thought) {
         return res.status(404).json({ message: 'No thought with that ID' });
       }
-      const formattedThought = thoughts.map(thought => {
-        return {...thought._doc, createdAt: dayjs(thought.createdAt).format('M/D/YYYY h:mm A') }
-      })
-      res.json(formattedThought);
+      // const formattedThought = thoughts.map(thought => {
+      //   return {...thought._doc, createdAt: dayjs(thought.createdAt).format('M/D/YYYY h:mm A') }
+      // })
+      // res.json(formattedThought);
+      res.json(thought);
     } catch (err) {
       res.status(500).json(err);
     }
@@ -103,19 +104,20 @@ module.exports = {
   // Adds a reaction to an thought. 
   async addReaction(req, res) {
     try {
-      const reaction = await Reaction.findOneAndUpdate(
-        { _id: req.params.reactionId },
+      const reaction = await Thought.findOneAndUpdate(
+        { _id: req.params.thoughId },
         { $addToSet: { reactions: req.body } },
         { runValidators: true, new: true }
       );
 
       if (!reaction) {
-        return res.status(404).json({ message: 'No reaction with this id!' });
+        return res.status(404).json({ message: 'No thought with this id!' });
       }
-      const formattedReaction = reactions.map(reaction => {
-        return {...reaction._doc, createdAt: dayjs(reaction.createdAt).format('M/D/YYYY h:mm A') }
-      })
-      res.json(formattedReaction);
+      // const formattedReaction = reactions.map(reaction => {
+      //   return {...reactions._doc, createdAt: dayjs(reactions.createdAt).format('M/D/YYYY h:mm A') }
+      // })
+      // res.json(formattedReaction);
+      res.json(reaction);
     } catch (err) {
       res.status(500).json(err);
     }

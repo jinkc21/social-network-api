@@ -28,7 +28,7 @@ const reactionSchema = new Schema(
       getters: true,
     },
     id: false,
-    timestamps: true
+    // timestamps: true
   }
 );
 
