@@ -7,12 +7,13 @@ module.exports = {
     try {
       const thoughts = await Thought.find();
      // console.log("Data: ", thoughts);
-      const formattedThoughts = thoughts.map(thought => {
-        // console.log("Thought: ", thought._doc);
-        return {...thought._doc, createdAt: dayjs(thought.createdAt).format('M/D/YYYY h:mm A') }
-      })
+      // const formattedThoughts = thoughts.map(thought => {
+      //   // console.log("Thought: ", thought._doc);
+      //   return {...thought._doc, createdAt: dayjs(thought.createdAt).format('M/D/YYYY h:mm A') }
+      // })
      // console.log("Formated: ", formattedThoughts);
-      res.json(formattedThoughts);
+      // res.json(formattedThoughts);
+      res.json(thoughts);
     } catch (err) {
       res.status(500).json(err);
     }
@@ -105,11 +106,11 @@ module.exports = {
   async addReaction(req, res) {
     try {
       const reaction = await Thought.findOneAndUpdate(
-        { _id: req.params.thoughId },
+        { _id: req.params.thoughtId },
         { $addToSet: { reactions: req.body } },
         { runValidators: true, new: true }
       );
-
+// console.log("reaction: ", reaction)
       if (!reaction) {
         return res.status(404).json({ message: 'No thought with this id!' });
       }
