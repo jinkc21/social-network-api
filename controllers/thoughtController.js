@@ -1,5 +1,5 @@
 const { Thought, User } = require('../models');
-const dayjs = require('dayjs')
+// const dayjs = require('dayjs')
 
 module.exports = {
  
@@ -41,7 +41,7 @@ module.exports = {
       const thought = await Thought.create(req.body);
       const user = await User.findOneAndUpdate(
         { _id: req.body.userId },
-        { $addToSet: { thoughts: thought._id } },
+        { $push: { thoughts: _id } },
         { new: true }
       );
 
@@ -51,9 +51,9 @@ module.exports = {
         })
       }
 
-      res.json('Created the thought 🎉');
+      res.json(thought);
     } catch (err) {
-      console.log(err);
+      console.log("error ",err);
       res.status(500).json(err);
     }
   },
@@ -79,7 +79,7 @@ module.exports = {
   // Deletes an thought from the database. Looks for an app by ID.
   async deleteThought(req, res) {
     try {
-      const thought = await Thought.findOneAndRemove({ _id: req.params.thoughtId });
+      const thought = await Thought.findOneAndDelete({ _id: req.params.thoughtId });
 
       if (!thought) {
         return res.status(404).json({ message: 'No thought with this id!' });
@@ -91,11 +91,11 @@ module.exports = {
         { new: true }
       );
 
-      if (!user) {
-        return res.status(404).json({
-          message: 'Thought created but no user with this id!',
-        });
-      }
+      // if (!user) {
+      //   return res.status(404).json({
+      //     message: 'Thought created but no user with this id!',
+      //   });
+      // }
 
       res.json({ message: 'Thought successfully deleted!' });
     } catch (err) {

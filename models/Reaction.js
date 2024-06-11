@@ -1,5 +1,5 @@
 const { Schema, Types } = require('mongoose');
-const timeStamp = require("../utils/timestamp");
+const dayjs = require('dayjs')
 
 // Schema to create User model
 const reactionSchema = new Schema(
@@ -21,7 +21,7 @@ const reactionSchema = new Schema(
       type: Date,
       default: Date.now(),
 // Used dayjs to format instead of getter method
-      get: (timestamp) => timeStamp(timestamp),
+      get: createdAt => dayjs(createdAt).format('M/D/YYYY h:mm A'),
     },
   },
   {
