@@ -32,7 +32,7 @@ While the server is running, open MongoDB and connect to the URI "mongodb://loca
 Data can be created and updated using MongoDB, Insomnia, or Postman.
 
 For a complete demo on the application, watch this video:
-https://app.screencastify.com/v2/manage/videos/yVVYGMwiMPkdItVZ8E34
+https://drive.google.com/file/d/1IuH12J4UAZJfbWKS7YaT1I6Agt7-887n/view
 
 ## Credits
 Documentation from MongoDB was used for inserting and navigating databases.
